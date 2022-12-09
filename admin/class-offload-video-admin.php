@@ -192,7 +192,7 @@ class Offload_video_Admin{
 			    $BUNNY_ACCESS_KEY = get_option('BUNNY_ACCESS_KEY');
 	            $BUNNY_LIBRARY_ID = get_option('BUNNY_LIBRARY_ID');
 			    $client = new \GuzzleHttp\Client();
-			    $videos = explode(',',$_POST['videos']);
+			    $videos = explode(',',sanitize_text_field($_POST['videos']));
 			    foreach($videos as $video_id)
 			    {
 	                $response = $client->request('DELETE', BUNNY_LIBRARY_URL.'/'.$BUNNY_LIBRARY_ID.'/videos/'.$video_id, [
@@ -229,7 +229,7 @@ class Offload_video_Admin{
                 //bulk delete
                 try {
                 $objects = [];
-                $videos = explode(',',$_POST['videos']);
+                $videos = explode(',',sanitize_text_field($_POST['videos']));
                 foreach ($videos as $content) 
                 {
                 	$objects[] = ['Key' => $content,];

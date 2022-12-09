@@ -70,8 +70,8 @@ class Offload_video_Admin_Table extends WP_List_Table {
 
 
           //pagination
-          $orderby = !empty($_GET["orderby"]) ? $_GET["orderby"] : 'ASC';
-          $order = !empty($_GET["order"]) ? $_GET["order"] : '';
+          $orderby = !empty(sanitize_text_field($_GET["orderby"])) ? sanitize_text_field($_GET["orderby"]) : 'ASC';
+          $order = !empty(sanitize_text_field($_GET["order"])) ? sanitize_text_field($_GET["order"]) : '';
           if(!empty($orderby) & !empty($order))
           { 
             $query =' ORDER BY '.$orderby.' '.$order; 
@@ -81,7 +81,7 @@ class Offload_video_Admin_Table extends WP_List_Table {
           $total_items = array();
           $totalitems=count($video_result_arr->items);                      
           $perpage = 10;
-          $paged = !empty($_GET["paged"]) ? $_GET["paged"] : '';
+          $paged = !empty(sanitize_text_field($_GET["paged"])) ? sanitize_text_field($_GET["paged"]) : '';
           if(empty($paged) || !is_numeric($paged) || $paged<=0 ){ $paged=1; }
           $totalpages = ceil($totalitems/$perpage); 
           if(!empty($paged) && !empty($perpage))
@@ -136,8 +136,8 @@ class Offload_video_Admin_Table extends WP_List_Table {
                     foreach ($results as $result) 
                     {
                       //pagination
-                      $orderby = !empty($_GET["orderby"]) ? $_GET["orderby"] : 'ASC';
-                      $order = !empty($_GET["order"]) ? $_GET["order"] : '';
+                      $orderby = !empty(sanitize_text_field($_GET["orderby"])) ? sanitize_text_field($_GET["orderby"]) : 'ASC';
+                      $order = !empty(sanitize_text_field($_GET["order"])) ? sanitize_text_field($_GET["order"]) : '';
                       if(!empty($orderby) & !empty($order))
                       { 
                         $query =' ORDER BY '.$orderby.' '.$order; 
@@ -154,7 +154,7 @@ class Offload_video_Admin_Table extends WP_List_Table {
                       }
                       $totalitems=count($total_items);                      
                       $perpage = 10;
-                      $paged = !empty($_GET["paged"]) ? $_GET["paged"] : '';
+                      $paged = !empty(sanitize_text_field($_GET["paged"])) ? sanitize_text_field($_GET["paged"]) : '';
                       if(empty($paged) || !is_numeric($paged) || $paged<=0 ){ $paged=1; }
                       $totalpages = ceil($totalitems/$perpage); 
                       if(!empty($paged) && !empty($perpage))

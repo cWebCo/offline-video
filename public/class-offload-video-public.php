@@ -94,8 +94,9 @@ class Offload_video_Public {
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/offload-video-public.css', array(), $this->version, 'all' );
         wp_enqueue_style( $this->plugin_name.'-grid', plugin_dir_url( __FILE__ ) . 'css/offload-video-grid.css', array(), $this->version, 'all' );
 
-        wp_enqueue_style( 'bootstrap.min',plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css', array(), '3.4.1', 'all' );
-        wp_enqueue_style( 'bootstrap-combined', plugin_dir_url( __FILE__ ) . 'css/bootstrap-combined.min.css', array(), '2.3.1', 'all' );
+        wp_enqueue_style( 'bootstrap.min',plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css', array(), '5.2.3', 'all' );
+        wp_enqueue_style( 'bootstrap-combined', plugin_dir_url( __FILE__ ) . 'css/bootstrap-combined.min.css', array(), '2.3.2', 'all' );
+
         wp_enqueue_style( 'basic_css', plugin_dir_url( __FILE__ ) . 'css/basic.css', array(), '3.8.4', 'all' );
         wp_enqueue_style( 'font-awesome.min', plugin_dir_url( __FILE__ ) . 'css/fontawesome.min.css', array(), '5.8.2', 'all');
 
@@ -126,9 +127,9 @@ class Offload_video_Public {
 		 * class.
 		 */
 
-		//wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/video-uploader-for-tutorlms-public.js', array( 'jquery' ), $this->version, false );
-			wp_enqueue_script('jquery.min', plugin_dir_url( __FILE__ ) . 'js/jquery.min.js', array( 'jquery' ),'3.6.0', true );
-			wp_enqueue_script('bootstrap.min', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ),'3.4.1', true );
+		
+			
+			wp_enqueue_script('bootstrap.min', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ),'5.2.3', true );
 					wp_enqueue_script('dropzone', plugin_dir_url( __FILE__ ) . 'js/dropzone.js', array( 'jquery' ),'3.8.4', true );
 			wp_enqueue_script('crypto', plugin_dir_url( __FILE__ ) . 'js/crypto-js.min.js', array( 'jquery' ),'4.1.1', true );
 			wp_enqueue_script('sha256', plugin_dir_url( __FILE__ ) . 'js/sha256.min.js', array( 'jquery' ),'4.1.1', true );
@@ -240,9 +241,9 @@ class Offload_video_Public {
             $result = $s3Client->putObject([
             'Bucket' => $amazon_s3_bucket,
             'Key'    => $dir.$key1,
-            'ContentLength' => $_FILES['media_file']['size'],
+            'ContentLength' => sanitize_text_field($_FILES['media_file']['size']),
             'Body'   => $file_data,
-            'ContentType' => $_FILES['media_file']['type'],
+            'ContentType' => sanitize_text_field($_FILES['media_file']['type']),
             'ACL' => 'private'
             ]);
             $response['ObjectURL'] = $result->get('ObjectURL');
@@ -298,7 +299,7 @@ class Offload_video_Public {
 	            ]);
 	            $result = $s3Client->deleteObject([
 	            'Bucket' => $amazon_s3_bucket,
-	            'Key'    => $_POST['video_id']
+	            'Key'    => sanitize_text_field($_POST['video_id'])
 	            ]);
 	            if($result)
 	            {

@@ -494,10 +494,10 @@ jQuery(document).on('click','.toggle-btn', function(e) {
     this.on("addedfile", function(file) 
     {
       var _this = this;
-      $('.dz-size').hide();
-      $('.dz-error-mark').hide();
-      $('.dz-error-message').hide();
-      $('.dz-details img').hide();
+      jQuery('.dz-size').hide();
+      jQuery('.dz-error-mark').hide();
+     jQuery('.dz-error-message').hide();
+      jQuery('.dz-details img').hide();
       files.push(file);
       //startUpload(file);
     });
