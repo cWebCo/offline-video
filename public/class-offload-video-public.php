@@ -129,7 +129,7 @@ class Offload_video_Public {
 
 		
 			
-			wp_enqueue_script('bootstrap.min', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ),'3.4.1', true );
+			wp_enqueue_script('bootstrap.min', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ),'5.2.3', true );
 					wp_enqueue_script('dropzone', plugin_dir_url( __FILE__ ) . 'js/dropzone.js', array( 'jquery' ),'3.8.4', true );
 			wp_enqueue_script('crypto', plugin_dir_url( __FILE__ ) . 'js/crypto-js.min.js', array( 'jquery' ),'4.1.1', true );
 			wp_enqueue_script('sha256', plugin_dir_url( __FILE__ ) . 'js/sha256.min.js', array( 'jquery' ),'4.1.1', true );
@@ -326,7 +326,7 @@ class Offload_video_Public {
 			    $html.= '<input type="text" id="endpoint" name="endpoint" value="https://video.bunnycdn.com/tusupload/"><input type="number" id="chunksize" name="chunksize"><input type="number" id="paralleluploads" name="paralleluploads" value="1">';
                
 
-                $html.='<div class="upload_btn_div"><a href="" class="btn stop open_dropzone">Upload Video</a></div>';
+                $html.='<div class="upload_btn_div"><a href="javascript:void(0)" class="btn stop open_dropzone">Upload Video</a></div>';
 				if(get_user_meta($user->ID,'collection_id',true)!="")
 				{
 		            require_once(dirname(__DIR__).'/public/guzzle/vendor/autoload.php');
@@ -417,7 +417,7 @@ class Offload_video_Public {
 				$html.= '<input type="hidden" id="streaming_connect_service" value="'.$streaming_connect_service.'">';
 			    $html.= '<input type="text" id="endpoint" name="endpoint" value="https://video.bunnycdn.com/tusupload/"><input type="number" id="chunksize" name="chunksize"><input type="number" id="paralleluploads" name="paralleluploads" value="1">';
                
-                $html.='<div class="upload_btn_div"><a href="" class="btn stop open_dropzone">Upload Video</a></div>';
+                $html.='<div class="upload_btn_div"><a href="javascript:void(0)" class="btn stop open_dropzone">Upload Video</a></div>';
 		        $amazon_s3_key = get_option('amazon_s3_key',0);
 		        $amazon_s3_secret = get_option('amazon_s3_secret',0);
 		        $amazon_s3_region = get_option('amazon_s3_region',0);

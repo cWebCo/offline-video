@@ -386,6 +386,12 @@ p.no_video {
     color: #800f2f;
     text-align: center;
 }
+.modal.fade.video_stream.show{
+opacity: 1;
+}
+body.modal-open .modal-backdrop.fade.show{
+opacity: 0.8;
+}
 
 @media only screen and (max-width: 1500px) and (min-width: 1351px)
 {

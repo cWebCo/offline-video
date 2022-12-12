@@ -1,9 +1,18 @@
 jQuery(document).ready(function(){
         jQuery(document).on('click','.open_dropzone',function(){
-         jQuery("#streaming_connect_myModal").modal("show");
-         return false;
+         jQuery("div#streaming_connect_myModal").modal("show");
+         jQuery(".modal-backdrop.fade.show").show();
+         jQuery(".modal.fade.video_stream").addClass("show");
+         jQuery("body").addClass("modal-open");
+        return false;
          });
 
+ jQuery(document).on('click','.video_stream button.close',function(){
+   jQuery("body").removeClass("modal-open");
+    jQuery(".modal.fade.video_stream.show").removeClass("show");
+    jQuery(".modal-backdrop.fade.show").hide();
+    
+});
 
         jQuery(".cwebco_file_uploader").on('change',function(){
         var url = window.URL.createObjectURL(jQuery(".cwebco_file_uploader").prop('files')[0]);   
