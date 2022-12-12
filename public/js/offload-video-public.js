@@ -4,7 +4,7 @@ jQuery(document).ready(function(){
          jQuery(".modal-backdrop.fade.show").show();
          jQuery(".modal.fade.video_stream").addClass("show");
          jQuery("body").addClass("modal-open");
-        return false;
+       //  return false;
          });
 
  jQuery(document).on('click','.video_stream button.close',function(){

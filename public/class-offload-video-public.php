@@ -129,7 +129,7 @@ class Offload_video_Public {
 
 		
 			
-			wp_enqueue_script('bootstrap.min', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ),'3.4.1', true );
+			wp_enqueue_script('bootstrap.min', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ),'5.2.3', true );
 					wp_enqueue_script('dropzone', plugin_dir_url( __FILE__ ) . 'js/dropzone.js', array( 'jquery' ),'3.8.4', true );
 			wp_enqueue_script('crypto', plugin_dir_url( __FILE__ ) . 'js/crypto-js.min.js', array( 'jquery' ),'4.1.1', true );
 			wp_enqueue_script('sha256', plugin_dir_url( __FILE__ ) . 'js/sha256.min.js', array( 'jquery' ),'4.1.1', true );
