@@ -126,15 +126,16 @@ class Offload_video_Admin{
     /****************Update & save Api settings*********************/
     public function offload_video_verify_and_save_api_settings() 
     {
-		if(isset($_POST['streaming_connect_service']))
+    	$streaming_connect_service=sanitize_text_field($_POST['streaming_connect_service']);
+		if(isset($streaming_connect_service))
 		{
-		    if($_POST['streaming_connect_service']=='bunny')
+		    if($streaming_connect_service=='bunny')
 		    {
             update_option('BUNNY_LIBRARY_ID',sanitize_text_field($_POST['BUNNY_LIBRARY_ID']));
             update_option('BUNNY_ACCESS_KEY',sanitize_text_field($_POST['BUNNY_ACCESS_KEY']));
             update_option('BUNNY_FILE_UPLOAD_LIMIT',sanitize_text_field($_POST['BUNNY_FILE_UPLOAD_LIMIT']));
 		    }
-		    elseif($_POST['streaming_connect_service']=='amazon')
+		    elseif($streaming_connect_service=='amazon')
 		    {
 		    update_option('amazon_s3_bucket',sanitize_text_field($_POST['amazon_s3_bucket']));
             update_option('amazon_s3_key',sanitize_text_field($_POST['amazon_s3_key']));
@@ -150,19 +151,21 @@ class Offload_video_Admin{
     /****************Show success notification on api settings update*********************/
 	public function offload_video_admin_notice__success() 
 	{
-		if(isset($_GET['bsacft_success']) && $_GET['bsacft_success']=='success') 
+		
+		@$bsacft_success=sanitize_text_field($_GET['bsacft_success']);
+		if(isset($bsacft_success) && $bsacft_success=='success') 
 		{
 			?>
 			<div class="notice notice-success is-dismissible">
-				<p><?php echo __( 'Saved successfully!', 'bsacft-text' ); ?></p>
+				<p><?php echo __( 'Saved successfully!', 'offload_video' ); ?></p>
 			</div>
 			<?php
 		}
-		elseif(isset($_GET['bsacft_success']) && $_GET['bsacft_success']=='failed') 
+		elseif(isset($bsacft_success) && $bsacft_success=='failed') 
 		{
 			?>
 			<div class="notice notice-error is-dismissible">
-				<p><?php echo __( 'Something went wrong!', 'bsacft-text' ); ?></p>
+				<p><?php echo __( 'Something went wrong!', 'offload_video' ); ?></p>
 			</div>
 			<?php
 		}
@@ -184,7 +187,8 @@ class Offload_video_Admin{
 
     public function offload_video_bulk_delete_video()
     {
-	    if(isset($_POST['videos']))
+    	$videos_path=sanitize_text_field($_POST['videos']);
+	    if(isset($videos_path))
 	    {
 	    	if(get_option('streaming_connect_service') == 'bunny')
 	    	{
@@ -192,7 +196,7 @@ class Offload_video_Admin{
 			    $BUNNY_ACCESS_KEY = get_option('BUNNY_ACCESS_KEY');
 	            $BUNNY_LIBRARY_ID = get_option('BUNNY_LIBRARY_ID');
 			    $client = new \GuzzleHttp\Client();
-			    $videos = explode(',',sanitize_text_field($_POST['videos']));
+			    $videos = explode(',',$videos_path);
 			    foreach($videos as $video_id)
 			    {
 	                $response = $client->request('DELETE', BUNNY_LIBRARY_URL.'/'.$BUNNY_LIBRARY_ID.'/videos/'.$video_id, [

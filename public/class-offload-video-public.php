@@ -95,8 +95,7 @@ class Offload_video_Public {
         wp_enqueue_style( $this->plugin_name.'-grid', plugin_dir_url( __FILE__ ) . 'css/offload-video-grid.css', array(), $this->version, 'all' );
 
         wp_enqueue_style( 'bootstrap.min',plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css', array(), '5.2.3', 'all' );
-        wp_enqueue_style( 'bootstrap-combined', plugin_dir_url( __FILE__ ) . 'css/bootstrap-combined.min.css', array(), '2.3.2', 'all' );
-
+        
         wp_enqueue_style( 'basic_css', plugin_dir_url( __FILE__ ) . 'css/basic.css', array(), '3.8.4', 'all' );
         wp_enqueue_style( 'font-awesome.min', plugin_dir_url( __FILE__ ) . 'css/fontawesome.min.css', array(), '5.8.2', 'all');
 
@@ -151,7 +150,7 @@ class Offload_video_Public {
 	/***********************Upload video on bunny video library********************************/
     public function offload_video_send_course_video_on_bunny()
     {
-    	if(isset($_POST['media_file']) && $_POST['streaming_connect_service'] == 'bunny')
+    	if(isset($_POST['media_file']) && sanitize_text_field($_POST['streaming_connect_service']) == 'bunny')
 		{
 	    	require_once(dirname(__FILE__).'/guzzle/vendor/autoload.php');
 	    	$current_user = wp_get_current_user();
@@ -181,7 +180,7 @@ class Offload_video_Public {
 	    	$collection_id = get_user_meta($current_user->ID,'collection_id',true);
 	    	//$collection_id = '20fd0feb-71ea-4b10-b5eb-aeb0f62198d1';
 	    	$video_response = $client->request('POST', BUNNY_LIBRARY_URL.'/'.$BUNNY_LIBRARY_ID.'/videos', [
-	        'body' => '{"title":"'.$_POST['media_file'].'","collectionId":"'.$collection_id.'"}',
+	        'body' => '{"title":"'.sanitize_text_field($_POST['media_file']).'","collectionId":"'.$collection_id.'"}',
 	        'headers' => [
 	        'accept' => 'application/json',
 	        'content-type' => 'application/*+json',
@@ -196,7 +195,7 @@ class Offload_video_Public {
 	            print_r(json_encode($response));
 		    }
 	    }
-	    elseif(isset($_FILES['media_file']) && $_POST['streaming_connect_service'] == 'amazon')
+	    elseif(isset($_FILES['media_file']) && sanitize_text_field($_POST['streaming_connect_service']) == 'amazon')
 	    {
 	    	$amazon_s3_key = get_option('amazon_s3_key',0);
 	        $amazon_s3_secret = get_option('amazon_s3_secret',0);
@@ -259,7 +258,8 @@ class Offload_video_Public {
 
     public function offload_video_delete_video_on_bunny()
     {
-	    if(isset($_POST['video_id']))
+    	$video_id=sanitize_text_field($_POST['video_id']);
+	    if(isset($video_id))
 	    {
 	    	if(get_option('streaming_connect_service') == 'bunny')
 	    	{
@@ -267,7 +267,7 @@ class Offload_video_Public {
 			    $BUNNY_ACCESS_KEY = get_option('BUNNY_ACCESS_KEY');
 	            $BUNNY_LIBRARY_ID = get_option('BUNNY_LIBRARY_ID');
 			    $client = new \GuzzleHttp\Client();
-			    $response = $client->request('DELETE', BUNNY_LIBRARY_URL.'/'.$BUNNY_LIBRARY_ID.'/videos/'.$_POST['video_id'], [
+			    $response = $client->request('DELETE', BUNNY_LIBRARY_URL.'/'.$BUNNY_LIBRARY_ID.'/videos/'.$video_id, [
 			    'headers' => [
 			    'AccessKey' => $BUNNY_ACCESS_KEY,
 			    'accept' => 'application/json',
@@ -335,7 +335,14 @@ class Offload_video_Public {
 					//$collection_id = get_user_meta(2,'collection_id',true);
 					$BUNNY_LIBRARY_ID = get_option('BUNNY_LIBRARY_ID');
 					$BUNNY_ACCESS_KEY = get_option('BUNNY_ACCESS_KEY');
-					$page_num = isset($_GET['num'])?$_GET['num']:1;
+					  
+					 if(isset($_GET['num'])){
+                        $page_num = filter_var($_GET['num'], FILTER_SANITIZE_NUMBER_INT);
+					 }else{
+					 	$page_num = 1;
+					 }
+                      // $page_num = isset($_GET['num'])?$_GET['num']:1;
+
 					$response = $client->request('GET', 'https://video.bunnycdn.com/library/'.$BUNNY_LIBRARY_ID.'/videos?page='.$page_num.'&itemsPerPage=21&collection='.$collection_id.'&orderBy=date', [
 					  'headers' => [
 					    'AccessKey' => $BUNNY_ACCESS_KEY,
@@ -385,8 +392,14 @@ class Offload_video_Public {
 						}
 						$html.= '</ul></div>';
 						if($video_result_arr->totalItems>21)
-						{
-							$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+						{  
+							if(isset($_SERVER['HTTP_HOST']) && isset($_SERVER['REQUEST_URI'])){
+                                   $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+							}
+							
+							else{
+                                $actual_link = "";
+							}
 							$actual_link_new = explode('?',$actual_link);
 							$html.= '<div class="pagination"><ul>';
 							$num_of_pages = $video_result_arr->totalItems/21;

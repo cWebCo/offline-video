@@ -15,8 +15,8 @@
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="tab bsacft-tabs">
-  <button class="tablinks active" onclick="openTab(event, 'bunny_settings')"><?php esc_html_e( 'Services', '-text' );?></button>
-  <button class="tablinks" onclick="openTab(event, 'bsacft_about')"><?php esc_html_e( 'About', 'bsacft-text' );?></button>
+  <button class="tablinks active" onclick="openTab(event, 'bunny_settings')"><?php esc_html_e( 'Services', 'offload_video' );?></button>
+  <button class="tablinks" onclick="openTab(event, 'bsacft_about')"><?php esc_html_e( 'About', 'offload_video' );?></button>
 
 </div>
 <div id="bunny_settings" class="tabcontent">
@@ -36,7 +36,7 @@ $streaming_connect_service = get_option('streaming_connect_service');
 	<table class="form-table">
 	        <tbody>
 				<tr valign="top" class="">
-					<th scope="row" class="titledesc"> <?php echo __( 'Service', 'bsacft-text' ); ?></th>
+					<th scope="row" class="titledesc"> <?php echo __( 'Service', 'offload_video' ); ?></th>
 					<td class="forminp forminp-text">
 						<select name="streaming_connect_service" id="streaming_connect_service">
 							<option value="bunny" <?php if($streaming_connect_service=='bunny') echo 'selected'; ?>>Bunny.net</option>
@@ -47,70 +47,71 @@ $streaming_connect_service = get_option('streaming_connect_service');
 			</tbody>
 	</table>
 	<div class="bunny_settings_div settings_div" <?php if($streaming_connect_service=='amazon') echo 'style="display:none;"'; else echo 'style="display:block;"'; ?>>
-	<h3><?php echo __( 'Bunny.net Settings', 'bsacft-text' ); ?></h3>
-	<p><?php echo __('You can find it on:', 'bsacft-text');?>  <a href="https://panel.bunny.net/stream/library/manage/60451#config-content-api" target="_blank">https://panel.bunny.net/stream/library/manage</a></p>
+	<h3><?php echo __( 'Bunny.net Settings', 'offload_video' ); ?></h3>
+	<p><?php echo __('You can find it on:', 'offload_video');?>  <a href="https://panel.bunny.net/stream/library/manage/60451#config-content-api" target="_blank">https://panel.bunny.net/stream/library/manage</a></p>
 		<table class="form-table">
 	        <tbody>
 				<tr valign="top" class="">
-					<th scope="row" class="titledesc"><?php echo __( 'Bunny Access Key', 'bsacft-text' ); ?></th>
+					<th scope="row" class="titledesc"><?php echo __( 'Bunny Access Key', 'offload_video' ); ?></th>
 					<td class="forminp forminp-text">
-						<input type="text" title="BUNNY_ACCESS_KEY" name="BUNNY_ACCESS_KEY" id="BUNNY_ACCESS_KEY" value="<?php if($BUNNY_ACCESS_KEY) echo $BUNNY_ACCESS_KEY; ?>" placeholder="<?php echo __( 'Enter API Access Key', 'bsacft-text' ); ?>"> 	
+						<input type="text" title="BUNNY_ACCESS_KEY" name="BUNNY_ACCESS_KEY" id="BUNNY_ACCESS_KEY" value="<?php if($BUNNY_ACCESS_KEY) echo esc_html($BUNNY_ACCESS_KEY); ?>" placeholder="<?php echo __( 'Enter API Access Key', 'offload_video' ); ?>"> 	
+						
 					</td>
 				</tr>
 				<tr valign="top" class="">
-					<th scope="row" class="titledesc"><?php echo __( 'Bunny Library ID', 'bsacft-text' ); ?> </th>
+					<th scope="row" class="titledesc"><?php echo __( 'Bunny Library ID', 'offload_video' ); ?> </th>
 					<td class="forminp forminp-text">
-						<input type="text" title="BUNNY_LIBRARY_ID" name="BUNNY_LIBRARY_ID" id="BUNNY_LIBRARY_ID" value="<?php if($BUNNY_LIBRARY_ID) echo $BUNNY_LIBRARY_ID; ?>" placeholder="<?php echo __( 'Enter Video library ID', 'bsacft-text' ); ?>"> 	
+						<input type="text" title="BUNNY_LIBRARY_ID" name="BUNNY_LIBRARY_ID" id="BUNNY_LIBRARY_ID" value="<?php if($BUNNY_LIBRARY_ID) echo esc_html($BUNNY_LIBRARY_ID); ?>" placeholder="<?php echo __( 'Enter Video library ID', 'offload_video' ); ?>"> 	
 					</td>
 				</tr>
 				<tr valign="top" class="">
-					<th scope="row" class="titledesc"><?php echo __( 'File Upload Limit', 'bsacft-text' ); ?> </th>
+					<th scope="row" class="titledesc"><?php echo __( 'File Upload Limit', 'offload_video' ); ?> </th>
 					<td class="forminp forminp-text">
-						<input type="text" title="BUNNY_FILE_UPLOAD_LIMIT" name="BUNNY_FILE_UPLOAD_LIMIT" id="BUNNY_FILE_UPLOAD_LIMIT" value="<?php if($BUNNY_FILE_UPLOAD_LIMIT) echo $BUNNY_FILE_UPLOAD_LIMIT; ?>" placeholder="<?php echo __( 'Enter file upload limit in GB', 'bsacft-text' ); ?>"> 	
+						<input type="text" title="BUNNY_FILE_UPLOAD_LIMIT" name="BUNNY_FILE_UPLOAD_LIMIT" id="BUNNY_FILE_UPLOAD_LIMIT" value="<?php if($BUNNY_FILE_UPLOAD_LIMIT) echo esc_html($BUNNY_FILE_UPLOAD_LIMIT); ?>" placeholder="<?php echo __( 'Enter file upload limit in GB', 'offload_video' ); ?>"> 	
 					</td>
 				</tr>
 			</tbody>
 		</table>
 </div>
 <div class="amazon_settings_div settings_div" <?php if($streaming_connect_service=='amazon') echo 'style="display:block;"'; else echo 'style="display:none;"'; ?>>
-	<h3><?php echo __( 'Amazon Settings', 'bsacft-text' ); ?></h3>
-	<p><?php echo __('You can find it on:', 'bsacft-text');?> <a href="https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials" target="_blank">https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials</a></p>
+	<h3><?php echo __( 'Amazon Settings', 'offload_video' ); ?></h3>
+	<p><?php echo __('You can find it on:', 'offload_video');?> <a href="https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials" target="_blank">https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials</a></p>
 		<table class="form-table">
 	        <tbody>
 	        	<tr valign="top" class="">
-					<th scope="row" class="titledesc"><?php echo __( 'Amazon S3 Bucket', 'bsacft-text' ); ?></th>
+					<th scope="row" class="titledesc"><?php echo __( 'Amazon S3 Bucket', 'offload_video' ); ?></th>
 					<td class="forminp forminp-text">
-						<input type="text" title="Amazon S3 Bucket" name="amazon_s3_bucket" id="amazon_s3_bucket" value="<?php if($amazon_s3_bucket) echo $amazon_s3_bucket; ?>" placeholder="<?php echo __( 'Enter bucket name', 'bsacft-text' ); ?>"> 	
+						<input type="text" title="Amazon S3 Bucket" name="amazon_s3_bucket" id="amazon_s3_bucket" value="<?php if($amazon_s3_bucket) echo $amazon_s3_bucket; ?>" placeholder="<?php echo __( 'Enter bucket name', 'offload_video' ); ?>"> 	
 					</td>
 				</tr>
 				<tr valign="top" class="">
-					<th scope="row" class="titledesc"> <?php echo __( 'Amazon S3 Key', 'bsacft-text' ); ?></th>
+					<th scope="row" class="titledesc"> <?php echo __( 'Amazon S3 Key', 'offload_video' ); ?></th>
 					<td class="forminp forminp-text">
-						<input type="text" title="Amazon S3 key" name="amazon_s3_key" id="amazon_s3_key" value="<?php if($amazon_s3_key) echo $amazon_s3_key; ?>" placeholder="<?php echo __( 'Enter Key', 'bsacft-text' ); ?>"> 	
+						<input type="text" title="Amazon S3 key" name="amazon_s3_key" id="amazon_s3_key" value="<?php if($amazon_s3_key) echo $amazon_s3_key; ?>" placeholder="<?php echo __( 'Enter Key', 'offload_video' ); ?>"> 	
 					</td>
 				</tr>
 				<tr valign="top" class="">
-					<th scope="row" class="titledesc"><?php echo __( 'Amazon S3 Secret', 'bsacft-text' ); ?></th>
+					<th scope="row" class="titledesc"><?php echo __( 'Amazon S3 Secret', 'offload_video' ); ?></th>
 					<td class="forminp forminp-text">
-						<input type="text" title="Amazon S3 secret" name="amazon_s3_secret" id="amazon_s3_secret" value="<?php if($amazon_s3_secret) echo $amazon_s3_secret; ?>" placeholder="<?php echo __( 'Enter Secret', 'bsacft-text' ); ?>"> 	
+						<input type="text" title="Amazon S3 secret" name="amazon_s3_secret" id="amazon_s3_secret" value="<?php if($amazon_s3_secret) echo $amazon_s3_secret; ?>" placeholder="<?php echo __( 'Enter Secret', 'offload_video' ); ?>"> 	
 					</td>
 				</tr>
 				<tr valign="top" class="">
-					<th scope="row" class="titledesc"><?php echo __( 'Amazon S3 Region', 'bsacft-text' ); ?></th>
+					<th scope="row" class="titledesc"><?php echo __( 'Amazon S3 Region', 'offload_video' ); ?></th>
 					<td class="forminp forminp-text">
-						<input type="text" title="Amazon S3 region" name="amazon_s3_region" id="amazon_s3_region" value="<?php if($amazon_s3_region) echo $amazon_s3_region; ?>" placeholder="<?php echo __( 'Enter Region', 'bsacft-text' ); ?>"> 	
+						<input type="text" title="Amazon S3 region" name="amazon_s3_region" id="amazon_s3_region" value="<?php if($amazon_s3_region) echo $amazon_s3_region; ?>" placeholder="<?php echo __( 'Enter Region', 'offload_video' ); ?>"> 	
 					</td>
 				</tr>
 				<tr valign="top" class="">
-					<th scope="row" class="titledesc"><?php echo __( 'File Upload Limit', 'bsacft-text' ); ?></th>
+					<th scope="row" class="titledesc"><?php echo __( 'File Upload Limit', 'offload_video' ); ?></th>
 					<td class="forminp forminp-text">
-						<input type="text" title="AMAZON_FILE_UPLOAD_LIMIT" name="AMAZON_FILE_UPLOAD_LIMIT" id="AMAZON_FILE_UPLOAD_LIMIT" value="<?php if($AMAZON_FILE_UPLOAD_LIMIT) echo $AMAZON_FILE_UPLOAD_LIMIT; ?>" placeholder="<?php echo __( 'Enter file upload limit in GB', 'bsacft-text' ); ?>"> 	
+						<input type="text" title="AMAZON_FILE_UPLOAD_LIMIT" name="AMAZON_FILE_UPLOAD_LIMIT" id="AMAZON_FILE_UPLOAD_LIMIT" value="<?php if($AMAZON_FILE_UPLOAD_LIMIT) echo $AMAZON_FILE_UPLOAD_LIMIT; ?>" placeholder="<?php echo __( 'Enter file upload limit in GB', 'offload_video' ); ?>"> 	
 					</td>
 				</tr>
 			</tbody>
 		</table>
 </div>
-<p class="submit"><input type="submit" value="<?php echo __( 'Save changes', 'bsacft-text' ); ?>"></p>
+<p class="submit"><input type="submit" value="<?php echo __( 'Save changes', 'offload_video' ); ?>"></p>
 </form>
 </div>
 </div>
@@ -119,11 +120,11 @@ $streaming_connect_service = get_option('streaming_connect_service');
 <table class="form-table">
 <tbody>
 <tr>
-<th scope="row"><label><?php echo __('Developed By:', 'bsacft-text');?></label></th>
+<th scope="row"><label><?php echo __('Developed By:', 'offload_video');?></label></th>
 <td>Webgarh Solutions</td>
 </tr>
 <tr>
-<th scope="row"><label><?php echo __('Support Email Address:', 'bsacft-text');?></label></th>
+<th scope="row"><label><?php echo __('Support Email Address:', 'offload_video');?></label></th>
 <td><a href="mailto:info@cwebconsultants.com">info@cwebconsultants.com</a></td>
 </tr>  
 </tbody>

@@ -20,7 +20,7 @@
  * Author URI:        https://webgarh.com/
  * License:           GPL-2.0+
  * License URI:       https://webgarh.com/
- * Text Domain:       Offload Videos
+ * Text Domain:       offload_video
  * Domain Path:       /languages
  */
 
