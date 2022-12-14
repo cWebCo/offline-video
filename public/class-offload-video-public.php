@@ -393,8 +393,10 @@ class Offload_video_Public {
 						$html.= '</ul></div>';
 						if($video_result_arr->totalItems>21)
 						{  
-							if(isset($_SERVER['HTTP_HOST']) && isset($_SERVER['REQUEST_URI'])){
-                                   $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+							$HTTP_HOST=sanitize_text_field($_SERVER['HTTP_HOST']);
+							$REQUEST_URI=sanitize_text_field($_SERVER['REQUEST_URI']);
+							if(isset($HTTP_HOST) && isset($REQUEST_URI)){
+                                   $actual_link = "http://".$HTTP_HOST.$REQUEST_URI;
 							}
 							
 							else{

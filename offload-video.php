@@ -20,7 +20,7 @@
  * Author URI:        https://webgarh.com/
  * License:           GPL-2.0+
  * License URI:       https://webgarh.com/
- * Text Domain:       offload_video
+ * Text Domain:       offload-videos-bunny-netaws-s3
  * Domain Path:       /languages
  */
 
@@ -29,7 +29,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-$PluginTextDomain="offload_video";
+$PluginTextDomain="offload-videos-bunny-netaws-s3";
 define( 'OFFLOAD_VIDEO_VERSION', '1.0.0' );
 define('BUNNY_LIBRARY_URL','https://video.bunnycdn.com/library');
 define('STREAMING_PLUGIN_PATH',plugin_dir_path( __FILE__ ));
