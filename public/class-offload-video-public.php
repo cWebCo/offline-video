@@ -141,9 +141,14 @@ class Offload_video_Public {
 	/****************Define admin URLS*********************/
     public function offload_video_define_frontend() 
     {
-		echo '<input type="text" id="bsacft_ajax_url" value="'.admin_url('admin-ajax.php').'" style="display:none;">';
-		echo '<input type="text" id="BUNNY_FILE_UPLOAD_LIMIT" value="'.get_option('BUNNY_FILE_UPLOAD_LIMIT').'" style="display:none;">';
-		echo '<input type="text" id="AMAZON_FILE_UPLOAD_LIMIT" value="'.get_option('AMAZON_FILE_UPLOAD_LIMIT').'" style="display:none;">';
+    	$BUNNY_FILE_UPLOAD_LIMIT=get_option('BUNNY_FILE_UPLOAD_LIMIT');
+    	$AMAZON_FILE_UPLOAD_LIMIT=get_option('AMAZON_FILE_UPLOAD_LIMIT');
+    	?>
+		<input type="text" id="bsacft_ajax_url" value="<?php echo esc_html(admin_url('admin-ajax.php'));?>" style="display:none;">
+		<input type="text" id="BUNNY_FILE_UPLOAD_LIMIT" value="<?php echo esc_html($BUNNY_FILE_UPLOAD_LIMIT);?>" style="display:none;">
+		<input type="text" id="AMAZON_FILE_UPLOAD_LIMIT" value="<?php echo esc_html($AMAZON_FILE_UPLOAD_LIMIT);?>" style="display:none;">
+
+		<?php
 		
     }
 

@@ -61,10 +61,7 @@ jQuery(document).ready(function() {
                                     type: "POST",
                                     enctype: 'multipart/form-data',
                                     url: ajaxurl,
-                                    dataType: "text",
                                     data: form,
-                                    processData: false,
-                                    contentType: false,
                                     cache: false,
                                     success: function(response) {
                                     if(response=="OK")

@@ -70,8 +70,8 @@ class Offload_video_Admin_Table extends WP_List_Table {
 
 
           //pagination
-          $orderby = !empty(sanitize_text_field($_GET["orderby"])) ? sanitize_text_field($_GET["orderby"]) : 'ASC';
-          $order = !empty(sanitize_text_field($_GET["order"])) ? sanitize_text_field($_GET["order"]) : '';
+          @$orderby = !empty(sanitize_text_field($_GET["orderby"])) ? sanitize_text_field($_GET["orderby"]) : 'ASC';
+          @$order = !empty(sanitize_text_field($_GET["order"])) ? sanitize_text_field($_GET["order"]) : '';
           if(!empty($orderby) & !empty($order))
           { 
             $query =' ORDER BY '.$orderby.' '.$order; 
@@ -81,7 +81,7 @@ class Offload_video_Admin_Table extends WP_List_Table {
           $total_items = array();
           $totalitems=count($video_result_arr->items);                      
           $perpage = 10;
-          $paged = !empty(sanitize_text_field($_GET["paged"])) ? sanitize_text_field($_GET["paged"]) : '';
+          @$paged = !empty(sanitize_text_field($_GET["paged"])) ? sanitize_text_field($_GET["paged"]) : '';
           if(empty($paged) || !is_numeric($paged) || $paged<=0 ){ $paged=1; }
           $totalpages = ceil($totalitems/$perpage); 
           if(!empty($paged) && !empty($perpage))
@@ -136,8 +136,8 @@ class Offload_video_Admin_Table extends WP_List_Table {
                     foreach ($results as $result) 
                     {
                       //pagination
-                      $orderby = !empty(sanitize_text_field($_GET["orderby"])) ? sanitize_text_field($_GET["orderby"]) : 'ASC';
-                      $order = !empty(sanitize_text_field($_GET["order"])) ? sanitize_text_field($_GET["order"]) : '';
+                      @$orderby = !empty(sanitize_text_field($_GET["orderby"])) ? sanitize_text_field($_GET["orderby"]) : 'ASC';
+                      @$order = !empty(sanitize_text_field($_GET["order"])) ? sanitize_text_field($_GET["order"]) : '';
                       if(!empty($orderby) & !empty($order))
                       { 
                         $query =' ORDER BY '.$orderby.' '.$order; 
@@ -154,7 +154,7 @@ class Offload_video_Admin_Table extends WP_List_Table {
                       }
                       $totalitems=count($total_items);                      
                       $perpage = 10;
-                      $paged = !empty(sanitize_text_field($_GET["paged"])) ? sanitize_text_field($_GET["paged"]) : '';
+                      @$paged = !empty(sanitize_text_field($_GET["paged"])) ? sanitize_text_field($_GET["paged"]) : '';
                       if(empty($paged) || !is_numeric($paged) || $paged<=0 ){ $paged=1; }
                       $totalpages = ceil($totalitems/$perpage); 
                       if(!empty($paged) && !empty($perpage))
@@ -194,7 +194,9 @@ class Offload_video_Admin_Table extends WP_List_Table {
 
 function extra_tablenav( $which ) {
       if ( $which == "top" ){
-        return '<a href="#" class="delete_all_button">Delete</a>';
+        ?>
+        <a href="#" class="delete_all_button"><?php esc_html_e( 'Delete', 'offload-videos-bunny-netaws-s3' );?></a>
+        <?php
      }
 
    }
@@ -223,21 +225,36 @@ function extra_tablenav( $which ) {
             $folder = $rec_key[0];
             if(!empty($title))
             {
-             $html.= '<tr id="record_'.$rec['Key'].'" >';
+             ?>
+             <tr id="record_<?php echo esc_html($rec['Key']);?>" >
+              <?php
              foreach ( $columns as $column_name => $column_display_name ) {
                  $class = "class='$column_name column-$column_name'";
                  $style = "";
                  $attributes = $class . $style;
                  switch ( $column_name ) 
                  {
-                    case "video_select":  $html.= '<td '.$attributes.'><input type="checkbox" name="deleteSelected" class="deleteSelected" value="'.$rec['Key'].'"></td>';   break;
-                    case "video_title":  $html.= '<td '.$attributes.'>'.$title.'</td>';   break;
-                    case "video_size": $html.= '<td '.$attributes.'>'.round($rec['Size']/(1024*1024),2).' MB</td>'; break;
-                    case "video_folder": $html.= '<td '.$attributes.'>'.$folder.'</td>'; break;
-                    case "video_date": $html.= '<td '.$attributes.'>'.date('d-m-Y H:i:s',$rec['LastModified_date']).'</td>'; break;
+                    case "video_select":  
+                    ?>
+                    <td <?php echo esc_html($attributes);?>>
+                      <input type="checkbox" name="deleteSelected" class="deleteSelected" value="<?php echo esc_html($rec['Key']);?>"></td>
+                    <?php   break;
+                    case "video_title":  ?>
+                    <td <?php echo esc_html($attributes);?>><?php echo esc_html($title);?></td> 
+                    <?php  break;
+                    case "video_size": ?>
+                    <td <?php echo esc_html($attributes);?>><?php echo esc_html(round($rec['Size']/(1024*1024),2))?> MB</td>
+                    <?php break;
+                    case "video_folder":?>
+                    <td <?php echo esc_html($attributes);?>><?php echo esc_html($folder);?></td>
+                     <?php break;
+                    case "video_date": ?><td <?php echo esc_html($attributes);?>><?php echo esc_html(date('d-m-Y H:i:s',$rec['LastModified_date']))?></td>
+                    <?php
+                    break;
                  }
               }
-            $html.=  '</tr>';
+            ?></tr>
+            <?php
             }
           }
         }
@@ -260,27 +277,34 @@ function extra_tablenav( $which ) {
             $folder= $collection_result_arr->name;
             if(!empty($rec->title))
             {
-            $html.=  '<tr id="record_'.$rec->guid.'" >';
+            ?><tr id="record_<?php echo esc_html($rec->guid);?>" ><?php
              foreach ( $columns as $column_name => $column_display_name ) {
                  $class = "class='$column_name column-$column_name'";
                  $style = "";
                  $attributes = $class . $style;
                  switch ( $column_name ) 
                  {
-                    case "video_select":  $html.= '<td '.$attributes.'><input type="checkbox" name="deleteSelected" class="deleteSelected" value="'.$rec->guid.'"></td>';   break;
-                    case "video_title":  $html.= '<td '.$attributes.'>'.$rec->title.'</td>';   break;
-                    case "video_size": $html.= '<td '.$attributes.'>'.round($rec->storageSize/(1024*1024),2).' MB</td>'; break;
-                    case "video_folder": $html.= '<td '.$attributes.'>'.$folder.'</td>'; break;
-                    case "video_date": $html.= '<td '.$attributes.'>'.$rec->dateUploaded.'</td>'; break;
+                    case "video_select":  ?><td <?php echo esc_html($attributes);?>><input type="checkbox" name="deleteSelected" class="deleteSelected" value="<?php echo esc_html($rec->guid);?>"></td>
+                    <?php   break;
+                    case "video_title":  ?><td <?php echo esc_html($attributes);?>><?php echo esc_html($rec->title);?></td>
+                    <?php  break;
+                    case "video_size": ?><td <?php echo esc_html($attributes);?>><?php echo esc_html(round($rec->storageSize/(1024*1024),2));?> MB</td>
+                    <?php break;
+                    case "video_folder": ?><td <?php echo esc_html($attributes);?>><?php echo esc_html($folder);?></td>
+                    <?php break;
+                    case "video_date": ?><td <?php echo esc_html($attributes);?>><?php echo esc_html($rec->dateUploaded);?></td>
+                    <?php break;
                  }
               }
-            $html.=  '</tr>';
+            ?>
+          </tr>
+            <?php
             }
           }
         }
       }
 
-      return $html;
+    
     }
 
     public function sort_s3_objects_by_date_admin($content_array)

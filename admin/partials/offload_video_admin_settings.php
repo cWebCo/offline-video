@@ -39,8 +39,8 @@ $streaming_connect_service = get_option('streaming_connect_service');
 					<th scope="row" class="titledesc"> <?php echo __( 'Service', 'offload-videos-bunny-netaws-s3' ); ?></th>
 					<td class="forminp forminp-text">
 						<select name="streaming_connect_service" id="streaming_connect_service">
-							<option value="bunny" <?php if($streaming_connect_service=='bunny') echo 'selected'; ?>>Bunny.net</option>
-							<option value="amazon" <?php if($streaming_connect_service=='amazon') echo 'selected'; ?>>Amazon S3</option>
+							<option value="bunny" <?php if($streaming_connect_service=='bunny') echo 'selected'; ?>><?php echo __( 'Bunny.net', 'offload-videos-bunny-netaws-s3' ); ?></option>
+							<option value="amazon" <?php if($streaming_connect_service=='amazon') echo 'selected'; ?>><?php echo __( 'Amazon S3', 'offload-videos-bunny-netaws-s3' ); ?></option>
 						</select> 	
 					</td>
 				</tr>
@@ -81,31 +81,31 @@ $streaming_connect_service = get_option('streaming_connect_service');
 	        	<tr valign="top" class="">
 					<th scope="row" class="titledesc"><?php echo __( 'Amazon S3 Bucket', 'offload-videos-bunny-netaws-s3' ); ?></th>
 					<td class="forminp forminp-text">
-						<input type="text" title="Amazon S3 Bucket" name="amazon_s3_bucket" id="amazon_s3_bucket" value="<?php if($amazon_s3_bucket) echo $amazon_s3_bucket; ?>" placeholder="<?php echo __( 'Enter bucket name', 'offload-videos-bunny-netaws-s3' ); ?>"> 	
+						<input type="text" title="Amazon S3 Bucket" name="amazon_s3_bucket" id="amazon_s3_bucket" value="<?php if($amazon_s3_bucket) echo esc_html($amazon_s3_bucket); ?>" placeholder="<?php echo __( 'Enter bucket name', 'offload-videos-bunny-netaws-s3' ); ?>"> 	
 					</td>
 				</tr>
 				<tr valign="top" class="">
 					<th scope="row" class="titledesc"> <?php echo __( 'Amazon S3 Key', 'offload-videos-bunny-netaws-s3' ); ?></th>
 					<td class="forminp forminp-text">
-						<input type="text" title="Amazon S3 key" name="amazon_s3_key" id="amazon_s3_key" value="<?php if($amazon_s3_key) echo $amazon_s3_key; ?>" placeholder="<?php echo __( 'Enter Key', 'offload-videos-bunny-netaws-s3' ); ?>"> 	
+						<input type="text" title="Amazon S3 key" name="amazon_s3_key" id="amazon_s3_key" value="<?php if($amazon_s3_key) echo esc_html($amazon_s3_key); ?>" placeholder="<?php echo __( 'Enter Key', 'offload-videos-bunny-netaws-s3' ); ?>"> 	
 					</td>
 				</tr>
 				<tr valign="top" class="">
 					<th scope="row" class="titledesc"><?php echo __( 'Amazon S3 Secret', 'offload-videos-bunny-netaws-s3' ); ?></th>
 					<td class="forminp forminp-text">
-						<input type="text" title="Amazon S3 secret" name="amazon_s3_secret" id="amazon_s3_secret" value="<?php if($amazon_s3_secret) echo $amazon_s3_secret; ?>" placeholder="<?php echo __( 'Enter Secret', 'offload-videos-bunny-netaws-s3' ); ?>"> 	
+						<input type="text" title="Amazon S3 secret" name="amazon_s3_secret" id="amazon_s3_secret" value="<?php if($amazon_s3_secret) echo esc_html($amazon_s3_secret); ?>" placeholder="<?php echo __( 'Enter Secret', 'offload-videos-bunny-netaws-s3' ); ?>"> 	
 					</td>
 				</tr>
 				<tr valign="top" class="">
 					<th scope="row" class="titledesc"><?php echo __( 'Amazon S3 Region', 'offload-videos-bunny-netaws-s3' ); ?></th>
 					<td class="forminp forminp-text">
-						<input type="text" title="Amazon S3 region" name="amazon_s3_region" id="amazon_s3_region" value="<?php if($amazon_s3_region) echo $amazon_s3_region; ?>" placeholder="<?php echo __( 'Enter Region', 'offload-videos-bunny-netaws-s3' ); ?>"> 	
+						<input type="text" title="Amazon S3 region" name="amazon_s3_region" id="amazon_s3_region" value="<?php if($amazon_s3_region) echo esc_html($amazon_s3_region); ?>" placeholder="<?php echo __( 'Enter Region', 'offload-videos-bunny-netaws-s3' ); ?>"> 	
 					</td>
 				</tr>
 				<tr valign="top" class="">
 					<th scope="row" class="titledesc"><?php echo __( 'File Upload Limit', 'offload-videos-bunny-netaws-s3' ); ?></th>
 					<td class="forminp forminp-text">
-						<input type="text" title="AMAZON_FILE_UPLOAD_LIMIT" name="AMAZON_FILE_UPLOAD_LIMIT" id="AMAZON_FILE_UPLOAD_LIMIT" value="<?php if($AMAZON_FILE_UPLOAD_LIMIT) echo $AMAZON_FILE_UPLOAD_LIMIT; ?>" placeholder="<?php echo __( 'Enter file upload limit in GB', 'offload-videos-bunny-netaws-s3' ); ?>"> 	
+						<input type="text" title="AMAZON_FILE_UPLOAD_LIMIT" name="AMAZON_FILE_UPLOAD_LIMIT" id="AMAZON_FILE_UPLOAD_LIMIT" value="<?php if($AMAZON_FILE_UPLOAD_LIMIT) echo esc_html($AMAZON_FILE_UPLOAD_LIMIT); ?>" placeholder="<?php echo __( 'Enter file upload limit in GB', 'offload-videos-bunny-netaws-s3' ); ?>"> 	
 					</td>
 				</tr>
 			</tbody>

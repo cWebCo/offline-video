@@ -172,8 +172,9 @@ class Offload_video_Admin{
     }
     /****************Define admin URLS*********************/
     public function offload_video_define_admin() 
-    {
-		echo '<input type="text" id="bsacft_admin_ajax_url" value="'.admin_url('admin-ajax.php').'" style="display:none;">';
+    { ?>
+    	<input type="text" id="bsacft_admin_ajax_url" value="<?php echo esc_html(admin_url('admin-ajax.php'));?>" style="display:none;">
+    	<?php
     }
 
     public function offload_video_admin_video_listing()
